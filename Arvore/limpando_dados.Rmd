@@ -1,0 +1,222 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+
+```{r}
+dados_treino = read.csv("treino.csv")
+dados_teste = read.csv("teste.csv")
+```
+
+```{r, message=F, warning=F}
+library(tidyverse)
+```
+
+#Retirando as linhas com valores faltantes
+```{r}
+dados_treino = na.omit(dados_treino)
+
+dados_teste = na.omit(dados_teste)
+
+```
+
+# Dividas/Patrimônio, acredito que os valores devem ser <=1, "razao_debito", pelo menos me parece o correto 
+# dados_teste e dados_treino
+
+```{r}
+
+for (i in 1:length(dados_teste$razao_debito)){
+  
+  if (dados_teste$razao_debito[i] > 1 && dados_teste$razao_debito[i] <= 10){
+    
+    dados_teste$razao_debito[i]  = round(dados_teste$razao_debito[i]/10,4)
+    
+  }
+  
+  if (dados_teste$razao_debito[i] > 10 && dados_teste$razao_debito[i] <= 100){
+    
+    dados_teste$razao_debito[i]  = round(dados_teste$razao_debito[i]/100,4)
+    
+  }  
+  
+  if (dados_teste$razao_debito[i] > 100 && dados_teste$razao_debito[i] <= 1000){
+    
+    dados_teste$razao_debito[i]  = round(dados_teste$razao_debito[i]/1000,4)
+    
+  }  
+  
+  if (dados_teste$razao_debito[i] > 1000 && dados_teste$razao_debito[i] <= 10000){
+    
+    dados_teste$razao_debito[i]  = round(dados_teste$razao_debito[i]/10000,4)
+    
+  }    
+  
+  
+  if (dados_teste$razao_debito[i] > 10000 && dados_teste$razao_debito[i] <= 100000){
+    
+    dados_teste$razao_debito[i]  = round(dados_teste$razao_debito[i]/100000,4)
+    
+  }    
+    
+  if (dados_teste$razao_debito[i] > 100000 && dados_teste$razao_debito[i] <= 1000000){
+    
+    dados_teste$razao_debito[i]  = round(dados_teste$razao_debito[i]/1000000,4)
+    
+  }    
+     
+  else{
+    dados_teste$razao_debito[i] = round(dados_teste$razao_debito[i],4) 
+  }
+}
+  
+
+
+
+
+for (i in 1:length(dados_treino$razao_debito)){
+  
+  if (dados_treino$razao_debito[i] > 1 && dados_treino$razao_debito[i] <= 10){
+    
+    dados_treino$razao_debito[i]  = round(dados_treino$razao_debito[i]/10,4)
+    
+  }
+  
+  if (dados_treino$razao_debito[i] > 10 && dados_treino$razao_debito[i] <= 100){
+    
+    dados_treino$razao_debito[i]  = round(dados_treino$razao_debito[i]/100,4)
+    
+  }  
+  
+  if (dados_treino$razao_debito[i] > 100 && dados_treino$razao_debito[i] <= 1000){
+    
+    dados_treino$razao_debito[i]  = round(dados_treino$razao_debito[i]/1000,4)
+    
+  }  
+  
+  if (dados_treino$razao_debito[i] > 1000 && dados_treino$razao_debito[i] <= 10000){
+    
+    dados_treino$razao_debito[i]  = round(dados_treino$razao_debito[i]/10000,4)
+    
+  }    
+  
+  
+  if (dados_treino$razao_debito[i] > 10000 && dados_treino$razao_debito[i] <= 100000){
+    
+    dados_treino$razao_debito[i]  = round(dados_treino$razao_debito[i]/100000,4)
+    
+  }    
+    
+  if (dados_treino$razao_debito[i] > 100000 && dados_treino$razao_debito[i] <= 1000000){
+    
+    dados_treino$razao_debito[i]  = round(dados_treino$razao_debito[i]/1000000,4)
+    
+  }    
+     
+  else{
+    dados_treino$razao_debito[i] = round(dados_treino$razao_debito[i],4) 
+  }
+}
+
+```
+
+# util_linhas_inseguras me parece ser correto os  valores serem abaixo de 1. 
+
+```{r}
+for (i in 1:length(dados_teste$util_linhas_inseguras)){
+  
+  if (dados_teste$util_linhas_inseguras[i] > 1 && dados_teste$util_linhas_inseguras[i] <= 10){
+    
+    dados_teste$util_linhas_inseguras[i]  = round(dados_teste$util_linhas_inseguras[i]/10,4)
+    
+  }
+  
+  if (dados_teste$util_linhas_inseguras[i] > 10 && dados_teste$util_linhas_inseguras[i] <= 100){
+    
+    dados_teste$util_linhas_inseguras[i]  = round(dados_teste$util_linhas_inseguras[i]/100,4)
+    
+  }  
+  
+  if (dados_teste$util_linhas_inseguras[i] > 100 && dados_teste$util_linhas_inseguras[i] <= 1000){
+    
+    dados_teste$util_linhas_inseguras[i]  = round(dados_teste$util_linhas_inseguras[i]/1000,4)
+    
+  }  
+  
+  if (dados_teste$util_linhas_inseguras[i] > 1000 && dados_teste$util_linhas_inseguras[i] <= 10000){
+    
+    dados_teste$util_linhas_inseguras[i]  = round(dados_teste$util_linhas_inseguras[i]/10000,4)
+    
+  }    
+  
+  
+  if (dados_teste$util_linhas_inseguras[i] > 10000 && dados_teste$util_linhas_inseguras[i] <= 100000){
+    
+    dados_teste$util_linhas_inseguras[i]  = round(dados_teste$util_linhas_inseguras[i]/100000,4)
+    
+  }    
+  
+  else{
+    dados_teste$util_linhas_inseguras[i] = round(dados_teste$util_linhas_inseguras[i],4) 
+  }
+}
+
+
+
+for (i in 1:length(dados_treino$util_linhas_inseguras)){
+  
+  if (dados_treino$util_linhas_inseguras[i] > 1 && dados_treino$util_linhas_inseguras[i] <= 10){
+    
+    dados_treino$util_linhas_inseguras[i]  = round(dados_treino$util_linhas_inseguras[i]/10,4)
+    
+  }
+  
+  if (dados_treino$util_linhas_inseguras[i] > 10 && dados_treino$util_linhas_inseguras[i] <= 100){
+    
+    dados_treino$util_linhas_inseguras[i]  = round(dados_treino$util_linhas_inseguras[i]/100,4)
+    
+  }  
+  
+  if (dados_treino$util_linhas_inseguras[i] > 100 && dados_treino$util_linhas_inseguras[i] <= 1000){
+    
+    dados_treino$util_linhas_inseguras[i]  = round(dados_treino$util_linhas_inseguras[i]/1000,4)
+    
+  }  
+  
+  if (dados_treino$util_linhas_inseguras[i] > 1000 && dados_treino$util_linhas_inseguras[i] <= 10000){
+    
+    dados_treino$util_linhas_inseguras[i]  = round(dados_treino$util_linhas_inseguras[i]/10000,4)
+    
+  }    
+  
+  
+  if (dados_treino$util_linhas_inseguras[i] > 10000 && dados_treino$util_linhas_inseguras[i] <= 100000){
+    
+    dados_treino$util_linhas_inseguras[i]  = round(dados_treino$util_linhas_inseguras[i]/100000,4)
+    
+  }    
+  
+  else{
+    dados_treino$util_linhas_inseguras[i] = round(dados_treino$util_linhas_inseguras[i],4)
+  }
+}
+
+```
+
+# Usando o table vemos que tem uma idade 0 nos dados_treino. 
+```{r}
+
+dados_treino = dados_treino %>% filter(idade != 0)
+
+```
+
+# Salvando o dataset
+```{r}
+write.csv(dados_teste, "dadosteste_limpo.csv", row.names = FALSE)
+write.csv(dados_treino, "dadostreino_limpo.csv", row.names = FALSE)
+
+```
+
+
+
+
